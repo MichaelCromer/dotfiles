@@ -135,6 +135,8 @@ parse_git_branch() {
 PS1="\[\e[0;27m\] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n|\$(date +%H:%M) \h:\w \[\033[0;31m\]\$(parse_git_branch)\[\e[0;27m\]\n| > "
 #export DOCKER_HOST=tcp://localhost:2375
 
+PATH=$PATH:~/bin
+
 
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
