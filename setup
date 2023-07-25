@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+ln -s ./.vim ~/.vim
+ln -s ./.bashrc ~/.bashrc
+ln -s ./.xmonad ~/.xmonad

@@ -1,0 +1,165 @@
+"   Do not try to be vi-compatible. Also wipe on reload sensibly
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+set nocompatible
+"   
+"   ------------------------------------------------------------
+"       Plugin management
+"   ------------------------------------------------------------
+"
+call plug#begin()
+
+Plug 'lervag/vimtex'
+Plug 'bling/vim-airline'
+Plug 'mattn/emmet-vim'
+Plug 'leafOfTree/vim-vue-plugin'
+Plug 'Yggdroot/indentLine'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+"
+"   ------------------------------------------------------------
+"       Set commands
+"   ------------------------------------------------------------
+
+
+"   Allow for indenting and plugins as appropriate
+filetype on
+"filetype indent on
+"filetype plugin on
+
+"   Allow for syntax highlighting appropriately
+syntax enable
+
+"   Change how files are read into buffers
+set autoread        "   Allow silent reloading of buffered files changed outside of vim (e.g. git checkout branch)
+set path+=**
+
+"   Change how the bottom bar looks and behaves
+set wildmenu        "   Allow for tab completion of commands
+set showcmd         "   Show the in-progress command buffer
+"set laststatus=2    "   Command area is 2 lines high
+
+"   Change how tabs work
+set tabstop=2       "   Tabs are -4- 2 spaces
+set shiftwidth=2
+set expandtab       "   Tabs always expand to spaces
+set autoindent      "   Vim will try to indent new lines correctly
+
+"   Change how searching works  
+set nohlsearch      "   No highlighted search results
+set incsearch       "   Search incrementally (i.e. before enter is pressed)
+
+"   Change how moving around the page and counting works
+set scrolloff=8     "   Scrolling will begin when cursor is 8 lines from top/bottom
+set number          "   The current line is numbered
+set relativenumber  "   The other lines are numbered relative to current
+set ruler           "   Cursor position located in cmd bar
+
+"   Change some other bits of behaviour
+set lazyredraw      "   Screen will not redraw while macros are running
+set foldcolumn=1    "   Extra left margin
+
+"   Change some of the page geometry and widths
+set textwidth=120   "   Gives a wider default wrapping width
+set colorcolumn=128 "   Gives a visual border to the text width
+set nowrap          "   Prevent long lines from wrapping (annoying in JSON)
+highlight ColorColumn ctermbg=lightgreen guibg=blue
+
+autocmd BufEnter *.tex set conceallevel=0
+
+let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
+
+"   ------------------------------------------------------------
+"       VimTex customisation options
+"   ------------------------------------------------------------
+"
+let g:vimtex_view_method = 'zathura'
+
+"   ------------------------------------------------------------
+"       Emmet customisation options
+"   ------------------------------------------------------------
+"
+let g:user_emmet_leader_key = ','
+let g:user_emmet_install_global = 0 
+autocmd FileType html,css,javascript,typescript,vue EmmetInstall
+"   ------------------------------------------------------------
+"       IndentLine customisation options
+"   ------------------------------------------------------------
+
+let g:coc_global_extensions = ['coc-tsserver']
+
+"   ------------------------------------------------------------
+"       IndentLine customisation options
+"   ------------------------------------------------------------
+
+"let g:indentLine_setColors = 0
+" let g:indentLine_defaultGroup = 'SpecialKey'
+
+" I also like term colours 4, 23, 24
+let g:indentLine_color_term = 8
+"
+"let g:indentLine_color_gui = '#A4E57E'
+"let g:indentLine_color_tty_light = 7 " (default: 4)
+"let g:indentLine_color_dark = 1 " (default: 2)
+
+" Trying to get something continuous but inoffensive
+let g:indentLine_char_list = ['┊']
+" let g:indentLine_char = '⋮' 
+"let g:indentLine_char_list = ['│']
+" let g:indentLine_char_list = ['⋮']
+"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+" let g:vim_json_conceal=0 -- change this to allow quotes in JSON files
+" let g:markdown_syntax_conceal=0 - likewise for .md files
+" who on earth decided this was a good naming scheme I don't know
+" great consistency, guys
+
+"   ------------------------------------------------------------
+"       Custom mappings
+"   ------------------------------------------------------------
+
+"   Fuck you tmux and screen
+let is_tmux_session = 0
+if &term =~ "^screen"
+  let is_tmux_session = 1
+elseif &term =~ "^tmux"
+  let is_tmux_session = 1
+endif
+
+if is_tmux_session
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
+
+"   Readjusting some things
+nnoremap Y y$
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"   Movement for indenting and moving whole lines
+nnoremap <C-Left>   i<C-d><Esc>
+nnoremap <C-Down>   :m .+1<CR>
+nnoremap <C-Up>     :m .-2<CR>
+nnoremap <C-Right>  i<C-t><Esc>
+
+"   As above but for visual mode blocks
+vnoremap <C-Left>   <gv
+vnoremap <C-Down>   :m '>+1<CR>gv
+vnoremap <C-Up>     :m '<-2<CR>gv
+vnoremap <C-Right>  >gv
+
+nnoremap <Leader><Bar>      <C-w>v
+nnoremap <Leader>_          <C-w>s
