@@ -126,6 +126,7 @@ myModMask           = mod4Mask
 myTerminal          = "gnome-terminal"
 myAltTerminal       = ""      
 myBrowser           = "qutebrowser"
+myWebSearch         = "dmenu_websearch"
 myLauncher          = "dmenu_run"
 myLatexEditor       = "texstudio"
 myTextEditor        = "vim"
@@ -815,6 +816,7 @@ myKeys conf = let
     , ("M-<Return>"       , addName "Terminal"                 $ spawn myTerminal)
     , ("M-\\"             , addName "Browser"                  $ spawn myBrowser)
     , ("M-t"              , addName "Latex"                    $ spawn myLatexEditor)
+    , ("M-/"              , addName "Web Search"               $ spawn myWebSearch)
     ] ^++^
 
     ----------------------------------------------------------
@@ -850,6 +852,8 @@ myKeys conf = let
       , ("M-S-n"                , addName "Shift to next empty workspace"   $ myFollowTo nextEmptyWS)
       , ("M-."                  , addName "Move to next non-empty WS"       $ myMoveTo nextNonEmptyWS)
       , ("M-,"                  , addName "Move to prev non-empty WS"       $ myMoveTo prevNonEmptyWS)
+      , ("M-S-."                , addName "Move to next non-empty WS"       $ myFollowTo nextNonEmptyWS)
+      , ("M-S-,"                , addName "Move to prev non-empty WS"       $ myFollowTo prevNonEmptyWS)
       , ("M-a"                  , addName "Toggle last workspace"           $ toggleWS)
       , ("M-S-w"                , addName "Swap screens"                    $ swapNextScreen)
       , ("M-w"                  , addName "Focus other screen"              $ nextScreen)

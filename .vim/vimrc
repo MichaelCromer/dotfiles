@@ -29,15 +29,16 @@ call plug#end()
 
 "   Allow for indenting and plugins as appropriate
 filetype on
-"filetype indent on
-"filetype plugin on
+filetype indent on
+filetype plugin on
 
 "   Allow for syntax highlighting appropriately
 syntax enable
 
 "   Change how files are read into buffers
 set autoread        "   Allow silent reloading of buffered files changed outside of vim (e.g. git checkout branch)
-set path+=**
+set path+=**        "   For finding in entire project context
+set dir=~/tmp/vimswp/,.
 
 "   Change how the bottom bar looks and behaves
 set wildmenu        "   Allow for tab completion of commands
@@ -70,7 +71,8 @@ set colorcolumn=128 "   Gives a visual border to the text width
 set nowrap          "   Prevent long lines from wrapping (annoying in JSON)
 highlight ColorColumn ctermbg=lightgreen guibg=blue
 
-autocmd BufEnter *.tex set conceallevel=0
+"   I hate having actual text disappear on me
+set conceallevel=0
 
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
@@ -115,6 +117,8 @@ let g:indentLine_char_list = ['┊']
 " let g:indentLine_char_list = ['⋮']
 "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
+" Stop conceallevel changing in tex documents
+let g:indentLine_fileTypeExclude = ['tex']
 " let g:vim_json_conceal=0 -- change this to allow quotes in JSON files
 " let g:markdown_syntax_conceal=0 - likewise for .md files
 " who on earth decided this was a good naming scheme I don't know
@@ -141,8 +145,8 @@ endif
 
 "   Readjusting some things
 nnoremap Y y$
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
+" nnoremap <C-d> <C-d>zz I think I have outgrown this
+" nnoremap <C-u> <C-u>zz
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

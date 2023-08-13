@@ -136,6 +136,11 @@ PS1="\[\e[0;27m\] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n|\$(date +%H:%M) \h
 #export DOCKER_HOST=tcp://localhost:2375
 
 PATH=$PATH:~/bin
+if [[ -z "$TEXMFLOCAL" ]]; then
+  TEXMFLOCAL=~/texmf
+else
+  TEXMFLOCAL="$TEXMFLOCAL":~/texmf
+fi
 
 
 #export NVM_DIR="$HOME/.nvm"
