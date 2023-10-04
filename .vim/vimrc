@@ -9,6 +9,7 @@ set nocompatible
 "
 call plug#begin()
 
+Plug 'github/copilot.vim'
 Plug 'lervag/vimtex'
 Plug 'bling/vim-airline'
 Plug 'mattn/emmet-vim'
@@ -87,7 +88,7 @@ let g:vimtex_view_method = 'zathura'
 "       Emmet customisation options
 "   ------------------------------------------------------------
 "
-let g:user_emmet_leader_key = ','
+let g:user_emmet_leader_key = '\'
 let g:user_emmet_install_global = 0 
 autocmd FileType html,css,javascript,typescript,vue EmmetInstall
 "   ------------------------------------------------------------

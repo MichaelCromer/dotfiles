@@ -125,6 +125,8 @@ alias ls='exa'
 alias ll='exa -lF'
 alias LL='exa -alF'
 
+alias zath='zathura'
+
 DEFAULT_PS1=$PS1
 
 parse_git_branch() {
@@ -132,10 +134,10 @@ parse_git_branch() {
     echo "("${ref#refs/heads/}")"
 }
 
-PS1="\[\e[0;27m\] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n|\$(date +%H:%M) \h:\w \[\033[0;31m\]\$(parse_git_branch)\[\e[0;27m\]\n| > "
+PS1="\[\e[0;27m\] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n|\$(date +%H:%M) \h:\w \[\033[0;31m\]\$(parse_git_branch)\[\e[0;27m\]\n "
 #export DOCKER_HOST=tcp://localhost:2375
 
-PATH=$PATH:~/bin
+PATH=$PATH:~/bin:~/prog
 if [[ -z "$TEXMFLOCAL" ]]; then
   TEXMFLOCAL=~/texmf
 else
