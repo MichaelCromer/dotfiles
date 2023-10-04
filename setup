@@ -1,4 +1,11 @@
 #!/usr/bin/bash
-ln -s ./.vim ~/.vim
-ln -s ./.bashrc ~/.bashrc
-ln -s ./.xmonad ~/.xmonad
+
+rm ~/.inputrc
+rm ~/.vim
+rm ~/.xmonad
+rm ~/.bashrc
+
+ln -s ~/dotfiles/bashrc ~/.bashrc
+ln -s ~/dotfiles/inputrc ~/.inputrc
+ln -s ~/dotfiles/vim ~/.vim
+ln -s ~/dotfiles/xmonad ~/.xmonad
