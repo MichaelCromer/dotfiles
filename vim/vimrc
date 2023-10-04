@@ -11,15 +11,6 @@ call plug#begin()
 
 Plug 'github/copilot.vim'
 Plug 'lervag/vimtex'
-Plug 'bling/vim-airline'
-Plug 'mattn/emmet-vim'
-Plug 'leafOfTree/vim-vue-plugin'
-Plug 'Yggdroot/indentLine'
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-Plug 'maxmellon/vim-jsx-pretty'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 "
