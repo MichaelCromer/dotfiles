@@ -41,7 +41,6 @@ colorscheme gruvbox
 set autoread        "   Allow silent reloading of buffered files changed outside of vim (e.g. git checkout branch)
 set path+=**        "   For finding in entire project context
 set dir=~/tmp/vim/swap/,.
-set sessionoptions+=sesdir=~/tmp/vim/session/
 
 "   Change how the bottom bar looks and behaves
 set wildmenu        "   Allow for tab completion of commands
@@ -57,7 +56,7 @@ set autoindent      "   Vim will try to indent new lines correctly
 "   Change how searching works  
 set nohlsearch      "   No highlighted search results
 set incsearch       "   Search incrementally (i.e. before enter is pressed)
-set wildmode=list:longest
+set wildmode=longest,full
 
 "   Change how moving around the page and counting works
 set scrolloff=8     "   Scrolling will begin when cursor is 8 lines from top/bottom
