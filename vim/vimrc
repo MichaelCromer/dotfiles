@@ -28,6 +28,9 @@ filetype plugin on
 "   Allow for syntax highlighting appropriately
 syntax enable
 
+"   Default colour scheme to gruvbox
+colorscheme gruvbox
+
 "   Change how files are read into buffers
 set autoread        "   Allow silent reloading of buffered files changed outside of vim (e.g. git checkout branch)
 set path+=**        "   For finding in entire project context
@@ -56,11 +59,11 @@ set ruler           "   Cursor position located in cmd bar
 
 "   Change some other bits of behaviour
 set lazyredraw      "   Screen will not redraw while macros are running
-set foldcolumn=1    "   Extra left margin
+set foldcolumn=0    "   Extra left margin
 
 "   Change some of the page geometry and widths
 set textwidth=120   "   Gives a wider default wrapping width
-set colorcolumn=128 "   Gives a visual border to the text width
+set colorcolumn=0   "   Gives a visual border to the text width
 set nowrap          "   Prevent long lines from wrapping (annoying in JSON)
 highlight ColorColumn ctermbg=lightgreen guibg=blue
 
@@ -75,51 +78,6 @@ let maplocalleader = "\<Space>"
 "   ------------------------------------------------------------
 "
 let g:vimtex_view_method = 'zathura'
-
-"   ------------------------------------------------------------
-"       Emmet customisation options
-"   ------------------------------------------------------------
-"
-let g:user_emmet_leader_key = '\'
-let g:user_emmet_install_global = 0 
-autocmd FileType html,css,javascript,typescript,vue EmmetInstall
-"   ------------------------------------------------------------
-"       IndentLine customisation options
-"   ------------------------------------------------------------
-
-let g:coc_global_extensions = ['coc-tsserver']
-
-"   ------------------------------------------------------------
-"       IndentLine customisation options
-"   ------------------------------------------------------------
-
-"let g:indentLine_setColors = 0
-" let g:indentLine_defaultGroup = 'SpecialKey'
-
-" I also like term colours 4, 23, 24
-let g:indentLine_color_term = 8
-"
-"let g:indentLine_color_gui = '#A4E57E'
-"let g:indentLine_color_tty_light = 7 " (default: 4)
-"let g:indentLine_color_dark = 1 " (default: 2)
-
-" Trying to get something continuous but inoffensive
-let g:indentLine_char_list = ['┊']
-" let g:indentLine_char = '⋮' 
-"let g:indentLine_char_list = ['│']
-" let g:indentLine_char_list = ['⋮']
-"let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
-" Stop conceallevel changing in tex documents
-let g:indentLine_fileTypeExclude = ['tex']
-" let g:vim_json_conceal=0 -- change this to allow quotes in JSON files
-" let g:markdown_syntax_conceal=0 - likewise for .md files
-" who on earth decided this was a good naming scheme I don't know
-" great consistency, guys
-
-"   ------------------------------------------------------------
-"       Custom mappings
-"   ------------------------------------------------------------
 
 "   Fuck you tmux and screen
 let is_tmux_session = 0
@@ -138,25 +96,3 @@ endif
 
 "   Readjusting some things
 nnoremap Y y$
-" nnoremap <C-d> <C-d>zz I think I have outgrown this
-" nnoremap <C-u> <C-u>zz
-
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-"   Movement for indenting and moving whole lines
-nnoremap <C-Left>   i<C-d><Esc>
-nnoremap <C-Down>   :m .+1<CR>
-nnoremap <C-Up>     :m .-2<CR>
-nnoremap <C-Right>  i<C-t><Esc>
-
-"   As above but for visual mode blocks
-vnoremap <C-Left>   <gv
-vnoremap <C-Down>   :m '>+1<CR>gv
-vnoremap <C-Up>     :m '<-2<CR>gv
-vnoremap <C-Right>  >gv
-
-nnoremap <Leader><Bar>      <C-w>v
-nnoremap <Leader>_          <C-w>s
