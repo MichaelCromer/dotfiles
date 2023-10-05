@@ -11,6 +11,7 @@ call plug#begin()
 
 Plug 'github/copilot.vim'
 Plug 'lervag/vimtex'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 "
