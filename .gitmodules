@@ -1,3 +1,6 @@
 [submodule "copilot"]
 	path = vim/pack/github/start/copilot.vim
 	url = https://github.com/github/copilot.vim.git
+[submodule "vimtex"]
+	path = vim/plugged/vimtex
+	url = https://github.com/lervag/vimtex.git
