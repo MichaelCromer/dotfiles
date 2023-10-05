@@ -29,12 +29,19 @@ filetype plugin on
 syntax enable
 
 "   Default colour scheme to gruvbox
+if (empty($TMUX)) && (has('termguicolors'))
+  set termguicolors
+endif
+if (has('termguicolors'))
+  set background=light
+endif
 colorscheme gruvbox
 
 "   Change how files are read into buffers
 set autoread        "   Allow silent reloading of buffered files changed outside of vim (e.g. git checkout branch)
 set path+=**        "   For finding in entire project context
-set dir=~/tmp/vimswp/,.
+set dir=~/tmp/vim/swap/,.
+set sessionoptions+=sesdir=~/tmp/vim/session/
 
 "   Change how the bottom bar looks and behaves
 set wildmenu        "   Allow for tab completion of commands
@@ -50,6 +57,7 @@ set autoindent      "   Vim will try to indent new lines correctly
 "   Change how searching works  
 set nohlsearch      "   No highlighted search results
 set incsearch       "   Search incrementally (i.e. before enter is pressed)
+set wildmode=list:longest
 
 "   Change how moving around the page and counting works
 set scrolloff=8     "   Scrolling will begin when cursor is 8 lines from top/bottom
@@ -65,7 +73,7 @@ set foldcolumn=0    "   Extra left margin
 set textwidth=120   "   Gives a wider default wrapping width
 set colorcolumn=0   "   Gives a visual border to the text width
 set nowrap          "   Prevent long lines from wrapping (annoying in JSON)
-highlight ColorColumn ctermbg=lightgreen guibg=blue
+"highlight ColorColumn ctermbg=lightgreen guibg=blue
 
 "   I hate having actual text disappear on me
 set conceallevel=0
