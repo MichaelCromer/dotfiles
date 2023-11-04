@@ -127,6 +127,7 @@ myTerminal          = "gnome-terminal"
 myAltTerminal       = ""      
 myBrowser           = "qutebrowser"
 myWebSearch         = "dmenu_websearch"
+myNoteTaker         = "dmenu_notes"
 myLauncher          = "dmenu_run"
 myLatexEditor       = "texstudio"
 myTextEditor        = "vim"
@@ -817,6 +818,7 @@ myKeys conf = let
     , ("M-\\"             , addName "Browser"                  $ spawn myBrowser)
     , ("M-t"              , addName "Latex"                    $ spawn myLatexEditor)
     , ("M-/"              , addName "Web Search"               $ spawn myWebSearch)
+    , ("M-'"              , addName "Take Note"                $ spawn myNoteTaker)
     ] ^++^
 
     ----------------------------------------------------------
