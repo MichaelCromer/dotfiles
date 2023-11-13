@@ -34,6 +34,7 @@ set dir=~/tmp/vimswp/,.
 
 "   Change how the bottom bar looks and behaves
 set wildmenu        "   Allow for tab completion of commands
+set wildmode=list:longest " The only sane way to tab complete
 set showcmd         "   Show the in-progress command buffer
 "set laststatus=2    "   Command area is 2 lines high
 
