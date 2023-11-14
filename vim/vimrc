@@ -57,7 +57,6 @@ set autoindent      "   Vim will try to indent new lines correctly
 "   Change how searching works  
 set nohlsearch      "   No highlighted search results
 set incsearch       "   Search incrementally (i.e. before enter is pressed)
-set wildmode=longest,full
 
 "   Change how moving around the page and counting works
 set scrolloff=8     "   Scrolling will begin when cursor is 8 lines from top/bottom
