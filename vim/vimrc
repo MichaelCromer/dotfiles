@@ -46,7 +46,7 @@ set dir=~/tmp/vim/swap/,.
 set wildmenu        "   Allow for tab completion of commands
 set wildmode=list:longest " The only sane way to tab complete
 set showcmd         "   Show the in-progress command buffer
-"set laststatus=2    "   Command area is 2 lines high
+set laststatus=2    "   Always show the bottom bar with file info
 
 "   Change how tabs work
 set tabstop=2       "   Tabs are -4- 2 spaces
@@ -77,6 +77,9 @@ set nowrap          "   Prevent long lines from wrapping (annoying in JSON)
 "   I hate having actual text disappear on me
 set conceallevel=0
 
+"   Readjusting some things
+nnoremap Y y$
+
 let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
@@ -86,20 +89,3 @@ let maplocalleader = "\<Space>"
 "
 let g:vimtex_view_method = 'zathura'
 
-"   Fuck you tmux and screen
-let is_tmux_session = 0
-if &term =~ "^screen"
-  let is_tmux_session = 1
-elseif &term =~ "^tmux"
-  let is_tmux_session = 1
-endif
-
-if is_tmux_session
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
-endif
-
-"   Readjusting some things
-nnoremap Y y$
