@@ -1,91 +1,42 @@
-"   Do not try to be vi-compatible. Also wipe on reload sensibly
 unlet! skip_defaults_vim
 source $VIMRUNTIME/defaults.vim
 set nocompatible
-"   
-"   ------------------------------------------------------------
-"       Plugin management
-"   ------------------------------------------------------------
-"
+
 call plug#begin()
-
-Plug 'github/copilot.vim'
 Plug 'lervag/vimtex'
-Plug 'morhetz/gruvbox'
-
 call plug#end()
-"
-"   ------------------------------------------------------------
-"       Set commands
-"   ------------------------------------------------------------
 
+set background=dark
+colorscheme retrobox
 
-"   Allow for indenting and plugins as appropriate
-filetype on
-filetype indent on
-filetype plugin on
-
-"   Allow for syntax highlighting appropriately
+filetype plugin indent on
 syntax enable
+set omnifunc=syntaxcomplete#Complete
 
-"   Default colour scheme to gruvbox
-if (empty($TMUX)) && (has('termguicolors'))
-  set termguicolors
-endif
-if (has('termguicolors'))
-  set background=light
-endif
-colorscheme gruvbox
+packadd! termdebug
+let g:termdebug_wide = 163
 
-"   Change how files are read into buffers
-set autoread        "   Allow silent reloading of buffered files changed outside of vim (e.g. git checkout branch)
-set path+=**        "   For finding in entire project context
-set dir=~/tmp/vim/swap/,.
+set autoread lazyredraw modeline
+set path+=**
+set splitbelow
+set wildmenu wildmode=list:longest
+set number relativenumber
+set showcmd laststatus=2 ruler scrolloff=8
+set tabstop=4 shiftwidth=4 expandtab autoindent
+set nohlsearch incsearch
+set textwidth=88 colorcolumn=90 nowrap conceallevel=0
 
-"   Change how the bottom bar looks and behaves
-set wildmenu        "   Allow for tab completion of commands
-set wildmode=list:longest " The only sane way to tab complete
-set showcmd         "   Show the in-progress command buffer
-set laststatus=2    "   Always show the bottom bar with file info
-
-"   Change how tabs work
-set tabstop=2       "   Tabs are -4- 2 spaces
-set shiftwidth=2
-set expandtab       "   Tabs always expand to spaces
-set autoindent      "   Vim will try to indent new lines correctly
-
-"   Change how searching works  
-set nohlsearch      "   No highlighted search results
-set incsearch       "   Search incrementally (i.e. before enter is pressed)
-
-"   Change how moving around the page and counting works
-set scrolloff=8     "   Scrolling will begin when cursor is 8 lines from top/bottom
-set number          "   The current line is numbered
-set relativenumber  "   The other lines are numbered relative to current
-set ruler           "   Cursor position located in cmd bar
-
-"   Change some other bits of behaviour
-set lazyredraw      "   Screen will not redraw while macros are running
-set foldcolumn=0    "   Extra left margin
-
-"   Change some of the page geometry and widths
-set textwidth=120   "   Gives a wider default wrapping width
-set colorcolumn=0   "   Gives a visual border to the text width
-set nowrap          "   Prevent long lines from wrapping (annoying in JSON)
-"highlight ColorColumn ctermbg=lightgreen guibg=blue
-
-"   I hate having actual text disappear on me
-set conceallevel=0
-
-"   Readjusting some things
-nnoremap Y y$
-
-let mapleader = "\<Space>"
-let maplocalleader = "\<Space>"
-
-"   ------------------------------------------------------------
-"       VimTex customisation options
-"   ------------------------------------------------------------
-"
+let &t_SI .= "\e[5 q"
+let &t_SR .= "\e[3 q"
+let &t_EI .= "\e[2 q"
 let g:vimtex_view_method = 'zathura'
 
+command VerticalTerminal execute 'vertical topleft terminal ++cols=' . max([&columns/3, 90]) | set winfixwidth
+command HorizontalTerminal execute 'botright terminal ++rows=' . max([&lines/6, 12]) | set winfixheight
+command Header execute 'find ' . substitute(expand("%:t"), "\.c$", ".h", "")
+command Source execute 'find ' . substitute(expand("%:t"), "\.h$", ".c", "")
+command LatexCompile execute expand('!pdflatex -output-directory %:h % && zathura ') . substitute(expand("%"), "\.tex$", ".pdf", "")
+
+nnoremap <Leader>H :Header<CR>
+nnoremap <Leader>C :Source<CR>
+nnoremap <Leader>L :LatexCompile<CR>

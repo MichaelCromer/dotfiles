@@ -1,0 +1,17 @@
+{
+    "volar-api-version": 3,
+    "volar.experimental.templateInterpolationService": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "typescript",
+        "typescriptreact",
+        "json",
+        "javascript",
+        "javascriptreact",
+        "vue"
+    ]},
+    "prettier.packageManager": "yarn",
+    "prettier.resolveGlobalModules": false,
+    "eslint.packageManager": "yarn",
+    "eslint.resolveGlobalModules": false,
+    "eslint.autoFixOnSave": true
+}

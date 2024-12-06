@@ -125,7 +125,7 @@ myModMask           = mod4Mask
 
 myTerminal          = "gnome-terminal"
 myAltTerminal       = ""      
-myBrowser           = "qutebrowser"
+myBrowser           = "firefox"
 myWebSearch         = "dmenu_websearch"
 myNoteTaker         = "dmenu_notes"
 myLauncher          = "dmenu_run"

@@ -1,0 +1,9 @@
+{
+  "eslint.enable": true,
+  "eslint.options": {
+    "configFile": "./.eslintrc.cjs"
+  },
+  "tsserver.enable": true,
+  "javascript.validate.enable": true,
+  "typescript.validate.enable": true
+}

@@ -1,0 +1,81 @@
+if !exists('b:vue_lint')
+    let b:vue_lint = 1
+
+    function! s:VueLintBuffer()
+        let eslint_output = system('eslint --format compact ' . expand('%') )
+
+        if strlen(eslint_output) > 0
+            let quickfix_list = []
+            let eslint_lines = split(eslint_output, '\n')[:-2]
+            
+            for line in eslint_lines 
+                if line == ''
+                    continue
+                endif
+
+                let endpos = match(line, ':')
+                let filename = strpart(line, 0, endpos)
+                let line = line[endpos+1:]
+
+                let endpos = match(line, ',')
+                let linenumber = strpart(line, match(line, 'line') + 5, endpos - match(line, 'line') - 5)
+                let line = line[endpos+1:]
+
+                let endpos = match(line, ',')
+                let colnumber = strpart(line, match(line, 'col') + 4, endpos - match(line, 'col') - 4)
+                let line = line[endpos+2:]
+
+                if match(line, 'Error') > 0
+                    let type = 'E'
+                else
+                    let type = 'W'
+                endif
+
+                call add(quickfix_list, {'filename': filename, 'lnum': linenumber, 'col': colnumber, 'text': line, 'type': type} )
+
+            endfor
+            echomsg quickfix_list  
+
+            call setqflist(quickfix_list)
+            copen
+        else 
+            call setqflist([], 'r')
+            cclose
+        endif
+
+    endfunction
+    
+endif 
+
+if !exists('b:vue_format')
+    let b:vue_format = 1
+    function! s:VueFormat()
+        noautocmd write
+        let l:cmd = 'yarn run prettier ' . expand('%:p') . ' --write'
+        let l:output = system(l:cmd)
+        if v:shell_error
+            9new
+            setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+            call setline(1, split(l:output, '\n'))
+            " how to return a value from a function!?
+            return 1
+        else 
+            edit!
+        endif
+        return 0
+    endfunction
+
+    set formatprg=yarn\ run\ prettier\ --stdin\ --stdin-filepath\ %\ --single-quote\ --trailing-comma\ all
+endif 
+
+if exists('b:vue_format') && exists('b:vue_lint') && !exists('b:vue_autocmd')
+    let b:vue_autocmd = 1
+    function! s:VueLintFormat()
+        let e = s:VueFormat()
+        if e == 0
+            call s:VueLintBuffer()
+        endif
+
+    endfunction
+    autocmd BufWritePost *.vue call s:VueLintFormat()
+endif

@@ -120,24 +120,30 @@ fi
 #   User defs
 #-----------------------------------------------------------
 set -o vi
+
 alias 0='xdg-open'
-alias ls='exa'
-alias ll='exa -lF'
-alias LL='exa -alF'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
 
 alias zath='zathura'
 
 DEFAULT_PS1=$PS1
 
-parse_git_branch() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "("${ref#refs/heads/}")"
+git_branch() {
+    local ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    echo " ("${ref#refs/heads/}")"
 }
 
-PS1="\[\e[0;27m\] _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n|\$(date +%H:%M) \h:\w \[\033[0;31m\]\$(parse_git_branch)\[\e[0;27m\]\n "
+git_local_state() {
+    local has_unstaged=$(git diff --quiet --exit-code)
+}
+
+
+PS1="\[\e[0;27m\] ___________________\n| $(date +%H:%M) \h: \w \[\033[0;31m\]\$(git_branch)\[\e[0;27m\]\n "
 #export DOCKER_HOST=tcp://localhost:2375
 
-PATH=$PATH:~/bin:~/prog
+PATH="$PATH":~/bin:~/prog
+PATH="$PATH":/root/.cargo/bin
 if [[ -z "$TEXMFLOCAL" ]]; then
   TEXMFLOCAL=~/texmf
 else
@@ -148,3 +154,17 @@ fi
 #export NVM_DIR="$HOME/.nvm"
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"
+
+source "$HOME/bin/git_prompt"
+#
+#if [[ -z $(ps x | grep "ssh-agent" | grep -v "grep") ]]; then
+    #eval `ssh-agent -s`
+    #echo "export SSH_AGENT_PID=$SSH_AGENT_PID" > "$HOME"/.ssh/agent.pid
+    #echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > "$HOME"/.ssh/agent.socket
+#else
+    #source "$HOME"/.ssh/agent.pid
+    #source "$HOME"/.ssh/agent.socket
+#fi
+#ssh-add "/home/mcromer/.ssh/mcc_desktop_git"
+#
